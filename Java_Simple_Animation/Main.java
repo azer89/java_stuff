@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
 import java.awt.Color;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
@@ -52,24 +53,33 @@ public class Main {
 		frame.setBounds(100, 100, 1024, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel my_panel = new JPanel();
-		frame.getContentPane().add(my_panel, BorderLayout.CENTER);
-		my_panel.setLayout(new BorderLayout());
+		JPanel top_panel = new JPanel();
+		frame.getContentPane().add(top_panel, BorderLayout.CENTER);
+		top_panel.setLayout(new BorderLayout());
 		
 		Canvas my_canvas = new Canvas();		
-		my_panel.add(my_canvas, BorderLayout.CENTER);
+		top_panel.add(my_canvas, BorderLayout.CENTER);
+
+		JPanel side_panel = new JPanel();
+		//side_panel.setLayout(new GridLayout(3, 1));
+		side_panel.setLayout(new BoxLayout(side_panel, BoxLayout.Y_AXIS));
+		top_panel.add(side_panel, BorderLayout.WEST);
 
 		//my_canvas.setBounds(163, 7, 859, 674);
 		//my_panel.add(my_canvas);		
 
-		/*
-		JLabel lblNewLabel = new JLabel("Canadaball");
-		lblNewLabel.setBounds(34, 7, 117, 15);
-		panel.add(lblNewLabel);
+		JLabel label1 = new JLabel("Canadaball");
+		side_panel.add(label1);
 
+		JLabel label2 = new JLabel("I'm sorry !!!");
+		side_panel.add(label2);
+
+		JLabel label3 = new JLabel("I love Tim Horton");
+		side_panel.add(label3);
+		
+		/*
 		JButton btnButton = new JButton("Button");
-		btnButton.setBounds(34, 95, 117, 25);
-		panel.add(btnButton);
+		my_panel.add(btnButton, BorderLayout.WEST);
 		
 		JLabel lblRidesAMoose = new JLabel("I'm SORRY !!!");
 		lblRidesAMoose.setBounds(34, 54, 117, 15);
