@@ -13,13 +13,22 @@ import javax.swing.JComponent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import java.awt.image.BufferedImage;
 
 import java.awt.Image;
 
 import javax.swing.Timer;
 
-public class Canvas extends JComponent implements ActionListener
+/*
+need to implement this:
+
+http://stackoverflow.com/questions/21075552/detect-mouse-hover-on-graphics2d-string
+*/
+
+public class Canvas extends JComponent implements ActionListener/*, MouseListener*/
 {
 	ImageIcon _imgIcon;
 	
@@ -32,16 +41,26 @@ public class Canvas extends JComponent implements ActionListener
     Image buffer = null;
 
     Boolean enableDB = true;
+
+    long previousTime;
+
 	
 	public Canvas()
 	{	
 		this._imgIcon = new ImageIcon("canadaball.png");
+
+		repaint();
 		my_timer = new Timer(30, this);
 		my_timer.start();	    
 	}
 	
 	public void paintComponent(Graphics g) 
 	{
+		//System.out.println("PAINT");
+		long currentTime = System.nanoTime();
+		long deltaTime = (currentTime - previousTime) / 1000000;
+		System.out.println(deltaTime);
+
 		Graphics screengc = null;
 		if(enableDB)
 		{
@@ -56,7 +75,7 @@ public class Canvas extends JComponent implements ActionListener
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-		g.setColor(Color.RED);
+		g.setColor(new Color(255, 50, 50));
 		g.fillRect(100, 100, this.getWidth() - 200, this.getHeight() - 200);
 		
 		g.drawImage(_imgIcon.getImage(), (int)finalPos.x, (int)finalPos.y, null);
@@ -65,6 +84,8 @@ public class Canvas extends JComponent implements ActionListener
 		{
 			screengc.drawImage(buffer, 0, 0, null);
 		}
+
+		previousTime = System.nanoTime();
 	}
 	
 	public void actionPerformed(ActionEvent e) 
@@ -84,6 +105,27 @@ public class Canvas extends JComponent implements ActionListener
 		
 		repaint();
 	}
-	
+
+	/*
+	public void mousePressed(MouseEvent e) 
+	{       
+    }
+
+    public void mouseReleased(MouseEvent e) 
+    {
+    }
+
+    public void mouseEntered(MouseEvent e) 
+    {
+    }
+
+    public void mouseExited(MouseEvent e) 
+    {
+    }
+
+    public void mouseClicked(MouseEvent e) 
+    {
+    }
+	*/
 }
 	
