@@ -59,7 +59,7 @@ public class Canvas extends JComponent implements ActionListener/*, MouseListene
 		//System.out.println("PAINT");
 		long currentTime = System.nanoTime();
 		long deltaTime = (currentTime - previousTime) / 1000000;
-		System.out.println(deltaTime);
+		//System.out.println(deltaTime);
 
 		Graphics screengc = null;
 		if(enableDB)
