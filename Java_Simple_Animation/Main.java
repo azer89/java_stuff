@@ -17,16 +17,32 @@ import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 
-public class Main implements ActionListener
+
+public class Main extends JFrame implements ActionListener, KeyListener
 {
 
-	private JFrame frame;
+	//private JFrame frame;
 	private JPanel splash_panel;
 	private JPanel top_panel;
 	private Canvas my_canvas;
+
+	public void keyPressed(KeyEvent e) 
+	{
+        System.out.println("keyPressed");
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
+
+    public void keyTyped(KeyEvent e) 
+    {
+        System.out.println("keyTyped");
+    }
 
 	/**
 	 * Launch the application.
@@ -40,7 +56,9 @@ public class Main implements ActionListener
 		// 		try 
 		// 		{
 		Main window = new Main();
-		window.frame.setVisible(true);
+		//window.frame.setVisible(true);
+		window.setVisible(true);
+
 		// 		} 
 		// 		catch (Exception e) 
 		// 		{
@@ -62,13 +80,13 @@ public class Main implements ActionListener
 	{
     	System.out.println("click !");
 
-    	frame.getContentPane().remove(splash_panel);
-		frame.getContentPane().add(top_panel, BorderLayout.CENTER);
-		
-		frame.revalidate();
-        frame.repaint();
-        frame.pack();
-        frame.setBounds(100, 100, 1024, 768);
+    	//
+    	getContentPane().remove(splash_panel);
+		getContentPane().add(top_panel, BorderLayout.CENTER);		
+		revalidate();
+        repaint();
+        pack();
+        setBounds(100, 100, 1024, 768);
   	}
 
 	/**
@@ -76,11 +94,16 @@ public class Main implements ActionListener
 	 */
 	private void initialize() 
 	{
-		frame = new JFrame();
-		frame.setBounds(100, 100, 1024, 768);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		//addKeyListener(this);
+	
+		addKeyListener(this);
+        setFocusable(true);
+        setFocusTraversalKeysEnabled(false);
 
+		//frame = new JFrame();
+		setBounds(100, 100, 1024, 768);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		/* SPLASH SCREEN */
 		splash_panel = new JPanel();
 		splash_panel.setLayout(new BorderLayout(100, 100));
@@ -88,12 +111,11 @@ public class Main implements ActionListener
 		splash_panel.add(canada_button, BorderLayout.NORTH);
 		canada_button.addActionListener(this);
 
-
 		/* ANIMATION CANVAS */
 		top_panel = new JPanel();
 		top_panel.setLayout(new BorderLayout());
 
-		frame.getContentPane().add(splash_panel, BorderLayout.CENTER);
+		getContentPane().add(splash_panel, BorderLayout.CENTER);
 		my_canvas = new Canvas();		
 		top_panel.add(my_canvas, BorderLayout.CENTER);
 

@@ -49,6 +49,8 @@ public class Canvas extends JComponent implements ActionListener/*, MouseListene
 	{	
 		this._imgIcon = new ImageIcon("canadaball.png");
 
+		
+
 		repaint();
 		my_timer = new Timer(30, this);
 		my_timer.start();	    
